@@ -337,6 +337,6 @@ footer { background: #222; color: #666; padding: 40px 20px; text-align: center; 
 /* Bloquear scroll mientras está la bienvenida */
 body.no-scroll {
     overflow: hidden;
-}
 
 }
+
