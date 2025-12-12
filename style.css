@@ -277,4 +277,66 @@ footer { background: #222; color: #666; padding: 40px 20px; text-align: center; 
     .t-item .event { font-size: 1.1rem; }
     .final-details { flex-direction: row; justify-content: center; gap: 80px; padding: 80px; text-align: left; }
     .whatsapp-pill { width: auto; }
+
+   /* === PANTALLA DE BIENVENIDA (OVERLAY) === */
+#welcome-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--olive); /* O usa var(--cream) si prefieres claro */
+    z-index: 10000; /* Encima de todo */
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.welcome-content {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    border: 1px solid var(--gold);
+    background: rgba(0,0,0,0.2); /* Fondo oscurito sutil */
+    width: 90%; max-width: 400px;
+}
+
+.welcome-names {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 20px;
+    color: var(--gold);
+}
+
+.welcome-text {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+#enter-btn {
+    background: white;
+    color: var(--olive);
+    border: none;
+    padding: 15px 40px;
+    font-family: var(--font-sans);
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#enter-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Clase para ocultar la pantalla suavemente */
+.hide-welcome {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Bloquear scroll mientras está la bienvenida */
+body.no-scroll {
+    overflow: hidden;
+}
+
 }
