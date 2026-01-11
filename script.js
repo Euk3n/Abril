@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (distance < 0) {
             clearInterval(countdownFunction); // Detener el reloj
             
-            // Forzar que todo se vea en ceros
+
             const dEl = document.getElementById("days");
             if(dEl) {
                 document.getElementById("days").innerText = "00";
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById("minutes").innerText = "00";
                 document.getElementById("seconds").innerText = "00";
             }
-            return; // Salir de la función para no calcular nada más
+            return;
         }
         // ----------------------------------------
 
@@ -96,4 +96,5 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
+
 
