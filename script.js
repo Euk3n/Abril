@@ -1,55 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 0. PANTALLA DE BIENVENIDA Y MÚSICA ---
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const enterBtn = document.getElementById('enter-btn');
-    const audio = document.getElementById("audioPlayer");
-    const musicContainer = document.querySelector(".music-float");
-    let isPlaying = false;
-
-    // Bloquear scroll al inicio
-    document.body.classList.add('no-scroll');
-
-    // Al hacer clic en "ABRIR INVITACIÓN"
-    if(enterBtn) {
-        enterBtn.addEventListener('click', () => {
-            // 1. Desaparecer pantalla
-            welcomeScreen.classList.add('hide-welcome');
-            
-            // 2. Permitir scroll de nuevo
-            document.body.classList.remove('no-scroll');
-            
-            // 3. INICIAR MÚSICA
-            audio.play().then(() => {
-                isPlaying = true;
-                musicContainer.classList.add("playing"); // Gira el disco
-            }).catch(error => {
-                console.log("El navegador bloqueó el audio (poco probable aquí).");
-            });
-        });
-    }
-// 1. CUENTA REGRESIVA
+    // 1. CUENTA REGRESIVA
+    // Fecha objetivo: 9 de Enero de 2026
     const targetDate = new Date("January 9, 2026 00:00:00").getTime();
 
     const countdownFunction = setInterval(() => {
         const now = new Date().getTime();
         const distance = targetDate - now;
 
+        
         if (distance < 0) {
-            clearInterval(countdownFunction); // Detener el reloj
+            clearInterval(countdownFunction);
             
-
             const dEl = document.getElementById("days");
+           
             if(dEl) {
                 document.getElementById("days").innerText = "00";
                 document.getElementById("hours").innerText = "00";
                 document.getElementById("minutes").innerText = "00";
                 document.getElementById("seconds").innerText = "00";
             }
-            return;
+            return; 
         }
-        // ----------------------------------------
+        // -------------------------------------------------------------
 
+        // Si NO ha pasado, calcula normal
         const d = Math.floor(distance / (1000 * 60 * 60 * 24));
         const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -64,8 +39,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 1000);
 
-    // --- 2. BOTÓN DE MÚSICA (TOGGLE) ---
-    // Por si quieren pausarla después
+    // 2. PANTALLA DE BIENVENIDA Y MÚSICA
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const enterBtn = document.getElementById('enter-btn');
+    const audio = document.getElementById("audioPlayer");
+    const musicContainer = document.querySelector(".music-float");
+    let isPlaying = false;
+
+    // Bloquear scroll al inicio para que no bajen antes de dar clic
+    document.body.classList.add('no-scroll');
+
+    // Al hacer clic en "ABRIR INVITACIÓN"
+    if(enterBtn) {
+        enterBtn.addEventListener('click', () => {
+            // Desaparecer pantalla
+            welcomeScreen.classList.add('hide-welcome');
+            
+            // Permitir scroll
+            document.body.classList.remove('no-scroll');
+            
+            // Intentar iniciar música
+            audio.play().then(() => {
+                isPlaying = true;
+                musicContainer.classList.add("playing");
+            }).catch(error => {
+                console.log("Audio autoplay bloqueado o no permitido");
+            });
+        });
+    }
+
+    // 3. BOTÓN DE MÚSICA (TOGGLE)
     window.toggleMusic = function() {
         if (isPlaying) {
             audio.pause();
@@ -77,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isPlaying = !isPlaying;
     };
 
-    // --- 3. ANIMACIONES AL SCROLL ---
+    // 4. ANIMACIONES AL SCROLL
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -96,5 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
+
 
 
