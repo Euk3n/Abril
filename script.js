@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // -------------------------------------------------------------
 
-        // Si NO ha pasado, calcula normal
         const d = Math.floor(distance / (1000 * 60 * 60 * 24));
         const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -99,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
+
 
 
 
