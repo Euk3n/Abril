@@ -28,13 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // --- 1. CUENTA REGRESIVA ---
+// 1. CUENTA REGRESIVA
     const targetDate = new Date("January 9, 2026 00:00:00").getTime();
 
-    setInterval(() => {
+    const countdownFunction = setInterval(() => {
         const now = new Date().getTime();
         const distance = targetDate - now;
+
+        if (distance < 0) {
+            clearInterval(countdownFunction); // Detener el reloj
+            
+            // Forzar que todo se vea en ceros
+            const dEl = document.getElementById("days");
+            if(dEl) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+            }
+            return; // Salir de la función para no calcular nada más
+        }
+        // ----------------------------------------
 
         const d = Math.floor(distance / (1000 * 60 * 60 * 24));
         const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -82,3 +96,4 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 });
+
